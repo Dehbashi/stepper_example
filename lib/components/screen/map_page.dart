@@ -190,14 +190,14 @@ class _MapPageState extends State<MapPage> {
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  ButtonWidget(),
-                  SizedBox(
-                    width: double.infinity,
-                    height: 350,
-                  ),
+                  // SizedBox(
+                  //   height: 30,
+                  // ),
+                  // ButtonWidget(),
+                  // SizedBox(
+                  //   width: double.infinity,
+                  //   height: 350,
+                  // ),
                 ],
               ),
             ),

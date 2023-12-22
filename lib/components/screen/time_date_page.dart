@@ -108,14 +108,14 @@ class _TimeDatePageState extends State<TimeDatePage> {
                 ],
               ),
             ),
-            SizedBox(
-              height: 30,
-            ),
-            ButtonWidget(),
-            SizedBox(
-              width: double.infinity,
-              height: 300,
-            ),
+            // SizedBox(
+            //   height: 30,
+            // ),
+            // ButtonWidget(),
+            // SizedBox(
+            //   width: double.infinity,
+            //   height: 300,
+            // ),
           ],
         ),
       ),

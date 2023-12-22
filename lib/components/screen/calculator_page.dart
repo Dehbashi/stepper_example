@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:im_stepper/stepper.dart';
 import './info.dart';
 import './build_step_widget.dart';
+import '../../class/button_widget.dart';
 
 class CalculatorPage extends StatefulWidget {
   // const QuestionPage({super.key});
@@ -71,17 +72,6 @@ class _CalculatorPageState extends State<CalculatorPage> {
                   ],
                 ),
               ),
-              // Container(
-              //   alignment: Alignment.center,
-              //   padding: EdgeInsets.all(5),
-              //   color: Colors.green,
-              //   child: Text(
-              //     info(activeStep),
-              //     style: TextStyle(
-              //       fontSize: 20,
-              //     ),
-              //   ),
-              // ),
               Directionality(
                 textDirection: TextDirection.rtl,
                 child: Container(
@@ -89,70 +79,36 @@ class _CalculatorPageState extends State<CalculatorPage> {
                   child: buildStepWidget(activeStep, serviceTitle),
                 ),
               ),
+              SizedBox(
+                height: 30,
+              ),
+              Directionality(
+                textDirection: TextDirection.rtl,
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  child: ButtonWidget(
+                    onPressedNext: () {
+                      setState(() {
+                        activeStep += 1;
+                      });
+                    },
+                    onPressedPrevious: () {
+                      if (activeStep > 0) {
+                        setState(() {
+                          activeStep -= 1;
+                        });
+                      }
+                    },
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: double.infinity,
+                height: 350,
+              ),
             ],
           ),
         ),
-        // body: Container(
-        //   margin: EdgeInsets.all(10),
-        //   child: Column(
-        //     children: [
-        //       Container(
-        //         width: double.infinity,
-        //         padding: EdgeInsets.only(top: 20),
-        //         alignment: Alignment.center,
-        //         child: Text(
-        //           'لطفاً مراحل ثبت پرسشنامه رو به دقت دنبال کنید',
-        //           style: TextStyle(
-        //             color: Color(0xFF04A8B2),
-        //             fontSize: 16,
-        //             fontWeight: FontWeight.bold,
-        //             fontFamily: 'iranSans',
-        //           ),
-        //         ),
-        //       ),
-        //       SizedBox(
-        //         height: 10,
-        //       ),
-        //       Container(
-        //         alignment: Alignment.centerRight,
-        //         width: double.infinity,
-        //         height: 35,
-        //         padding: EdgeInsets.only(right: 15),
-        //         decoration: BoxDecoration(
-        //           color: Color(0xFFCDEEF0),
-        //           borderRadius: BorderRadius.circular(10),
-        //         ),
-        //         child: Directionality(
-        //           textDirection: TextDirection.rtl,
-        //           child: Row(
-        //             children: [
-        //               Text(
-        //                 serviceTitle,
-        //                 style: TextStyle(
-        //                   color: Color(0xFF037E85),
-        //                   fontSize: 16,
-        //                   // fontWeight: FontWeight.bold,
-        //                 ),
-        //               ),
-        //               Icon(
-        //                 Icons.arrow_back_ios_new_outlined,
-        //                 textDirection: TextDirection.ltr,
-        //                 color: Color(0xFF037E85),
-        //               ),
-        //             ],
-        //           ),
-        //         ),
-        //       ),
-        //       SizedBox(
-        //         height: 20,
-        //       ),
-        //       Directionality(
-        //         textDirection: TextDirection.rtl,
-        //         child: QuestionPage(serviceTitle: serviceTitle),
-        //       ),
-        //     ],
-        //   ),
-        // ),
       ),
     );
   }

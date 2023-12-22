@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 class ButtonWidget extends StatelessWidget {
   // const ButtonWidget({super.key});
 
+  final void Function()? onPressedNext;
+  void Function()? onPressedPrevious;
+
+  ButtonWidget({required this.onPressedNext, required this.onPressedPrevious});
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -16,7 +21,7 @@ class ButtonWidget extends StatelessWidget {
             ),
             width: MediaQuery.devicePixelRatioOf(context),
             child: TextButton(
-              onPressed: () {},
+              onPressed: onPressedPrevious,
               child: Text(
                 'بازگشت به مرحله قبل',
                 style: TextStyle(
@@ -39,7 +44,7 @@ class ButtonWidget extends StatelessWidget {
             ),
             width: MediaQuery.devicePixelRatioOf(context),
             child: TextButton(
-              onPressed: () {},
+              onPressed: onPressedNext,
               child: Text(
                 'رفتن به مرحله بعد',
                 style: TextStyle(

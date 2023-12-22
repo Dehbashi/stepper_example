@@ -73,7 +73,7 @@ class _UserPageState extends State<UserPage> {
       margin: EdgeInsets.all(10),
       width: double.infinity,
       // height: MediaQuery.of(context).size.height,
-      height: 650,
+      height: 560,
       decoration: BoxDecoration(
         color: Color(0xFFCDEEF0),
         borderRadius: BorderRadius.circular(10),

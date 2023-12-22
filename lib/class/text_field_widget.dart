@@ -51,7 +51,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
       child: TextFormField(
         controller: _controller,
         keyboardType: widget.keyboardType,
-        inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+        // inputFormatters: [FilteringTextInputFormatter.digitsOnly],
         validator: (value) {
           if (widget.validator != null) {
             // Invoke the validator function from the parent widget
@@ -70,7 +70,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
             color: Color(0xFF037E85),
             fontWeight: FontWeight.bold,
             fontFamily: 'iranSans,'),
-        textAlign: TextAlign.left,
+        textAlign: TextAlign.right,
         obscureText: widget.obscureText,
         decoration: InputDecoration(
           hintText: widget.labelText,
@@ -91,7 +91,8 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
               color: Colors.white,
             ),
           ),
-          prefixIcon: Tooltip(
+          prefixIcon: widget.suffixIcon,
+          suffixIcon: Tooltip(
             message: 'پاکسازی شماره',
             child: GestureDetector(
               onTap: clearTextField,
@@ -101,9 +102,6 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
                 size: 34,
               ),
             ),
-          ),
-          suffixIcon: Icon(
-            widget.suffixIcon,
           ),
         ),
       ),

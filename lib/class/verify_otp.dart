@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../components/screen/name_page.dart';
 
 Future<void> verifyOtpCode(
   BuildContext context,
@@ -42,7 +43,67 @@ Future<void> verifyOtpCode(
     prefs.setString('userAgent', userAgent);
 
     print('your data is $data');
-    Navigator.of(context).pop();
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Center(
+          child: AlertDialog(
+            title: Icon(
+              Icons.verified_user,
+              size: 80,
+              color: Color(0xFF037E85),
+            ),
+            content: Directionality(
+              textDirection: TextDirection.rtl,
+              child: Text(
+                'احراز هویت انجام شد!',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 20,
+                ),
+              ),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return Dialog(
+                        child: Container(
+                          width: 400, // Set the desired width
+                          // padding: EdgeInsets.all(16),
+                          child: SingleChildScrollView(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                NamePage(),
+                                SizedBox(height: 16),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: Text('برگشت به صفحه قبل'),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
+                child: Text(
+                  'ورود به صفحه بعد',
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+    // Navigator.of(context).pop();
     // Navigator.push(
     //   context,
     //   MaterialPageRoute(
@@ -50,11 +111,30 @@ Future<void> verifyOtpCode(
     //   ),
     // );
   } else {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content:
-            Text('Failed to send phone number with ${response.statusCode}'),
-      ),
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(
+            'کد اشتباه',
+            textAlign: TextAlign.right,
+          ),
+          content: Text(
+            'کد وارد شده صحیح نمی باشد. لطفاً مجدد امتحان نمایید.',
+            textAlign: TextAlign.right,
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                'باشه',
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }
