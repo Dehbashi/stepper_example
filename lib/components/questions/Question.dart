@@ -1,7 +1,13 @@
 class Question {
   String question;
   List<String> answers;
-  String type; // added
+  String type;
+  int tag;
 
-  Question({required this.question, required this.answers, required this.type});
+  Question({
+    required this.question,
+    required this.answers,
+    required this.type,
+    required this.tag,
+  });
 }

@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import '../../class/verify_button.dart';
 import '../../class/text_field_widget.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
 import 'package:get_ip_address/get_ip_address.dart';
 import 'package:flutter/services.dart';
 import '../../class/get_user_agent.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../class/send_phone_number.dart';
 import './otp_page.dart';
-import './calculator_page.dart';
 
 class UserPage extends StatefulWidget {
   const UserPage({super.key});

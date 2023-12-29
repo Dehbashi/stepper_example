@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../../class/map_widget.dart';
 import './transportation_box.dart';
 import './price_box.dart';
-import '../../class/button_widget.dart';
 
 class MapPage extends StatefulWidget {
   const MapPage({super.key});
@@ -190,14 +189,6 @@ class _MapPageState extends State<MapPage> {
                       ),
                     ],
                   ),
-                  // SizedBox(
-                  //   height: 30,
-                  // ),
-                  // ButtonWidget(),
-                  // SizedBox(
-                  //   width: double.infinity,
-                  //   height: 350,
-                  // ),
                 ],
               ),
             ),

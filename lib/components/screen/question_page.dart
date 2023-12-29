@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stepper_example/components/questions/Question.dart';
 import 'package:stepper_example/components/screen/price_box.dart';
-import '../questions/question_koolerabi.dart' show QuestionKoolerAbi;
-import '../questions/question_nasbeanten.dart' show QuestionNasbeAnten;
-import './price_box.dart';
+import '../../class/service_selection.dart';
 
 class QuestionPage extends StatefulWidget {
   // const QuestionPage({super.key});
@@ -17,42 +15,50 @@ class QuestionPage extends StatefulWidget {
 }
 
 class _QuestionPageState extends State<QuestionPage> {
-  final QuestionKoolerAbi questionKoolerAbi = QuestionKoolerAbi();
-  final QuestionNasbeAnten questionNasbeAnten = QuestionNasbeAnten();
-
   int currentQuestionIndex = 0;
   int? selectedAnswerIndex;
+  dynamic questionService;
+  late List<Question> questionItems;
+
+  @override
+  void initState() {
+    super.initState();
+    questionService = ServiceSelection.getQuestionService(widget.serviceTitle);
+    questionItems =
+        ServiceSelection.getQuestionService(widget.serviceTitle).questions;
+  }
+
+  void handleNextQuestion() {
+    questionService.nextQuestion(selectedAnswerIndex!);
+    int currentIndex = questionService.currentQuestionIndex;
+    setState(() {
+      currentQuestionIndex = currentIndex;
+    });
+    print('Your selectedAnswerIndex is $selectedAnswerIndex');
+    print('Your currentQuestionIndex is $currentQuestionIndex');
+  }
+
+  void handlePreviousQuestion() {
+    questionService.previousQuestion();
+    int currentIndex = questionService.currentQuestionIndex;
+    setState(() {
+      currentQuestionIndex = currentIndex;
+    });
+    print('Your currentQuestionIndex is $currentQuestionIndex');
+  }
 
   @override
   Widget build(BuildContext context) {
     final String serviceTitle = widget.serviceTitle;
-    // late List<dynamic> questionItems;
-    late List<Question> questionItems;
-
-    switch (serviceTitle) {
-      case 'نصب و سرویس کولر آبی':
-        questionItems = questionKoolerAbi.questions;
-
-        break;
-      // case 'نصب آنتن و آنتن مرکزی':
-      //   questionItems = questionNasbeAnten.Questionnaire;
-      //   break;
-      default:
-        questionItems = [];
-        break;
-    }
 
     Question currentQuestionModel = questionItems[currentQuestionIndex];
     final String currentQuestion = currentQuestionModel.question;
     final String currentQuestionType = currentQuestionModel.type;
     final List<String> currentAnswers = currentQuestionModel.answers;
-
-    // final String currentQuestion =
-    //     questionItems[currentQuestionIndex]['question'];
-    // final String currentQuestionType =
-    //     questionItems[currentQuestionIndex]['type'];
-    // final List<String> currentAnswers =
-    //     questionItems[currentQuestionIndex]['answers'];
+    print('Your question model is $currentQuestionModel');
+    print('Your questions are ${currentQuestionModel.question}');
+    print('Your answers are ${currentQuestionModel.answers}');
+    print('Your types are ${currentQuestionModel.type}');
 
     final isLastQuestion = currentQuestionIndex == questionItems.length - 1;
     final isFirstQuestion = currentQuestionIndex == 0;
@@ -179,6 +185,10 @@ class _QuestionPageState extends State<QuestionPage> {
                       fillColor: Color.fromARGB(255, 239, 237, 237),
                     ),
                     onChanged: (value) {
+                      setState(() {
+                        selectedAnswerIndex = 1;
+                      });
+
                       // Handle the text field value change
                       // You can store the value in a variable or use it as needed
                     },
@@ -202,11 +212,7 @@ class _QuestionPageState extends State<QuestionPage> {
                   onPressed: isFirstQuestion
                       ? null
                       : () {
-                          setState(() {
-                            currentQuestionIndex--;
-                            selectedAnswerIndex =
-                                null; // Reset selected answer for the previous question
-                          });
+                          handlePreviousQuestion();
                         },
                   child: Icon(
                     Icons.arrow_back_outlined,
@@ -222,15 +228,10 @@ class _QuestionPageState extends State<QuestionPage> {
                       Color(0xFF04A8B2),
                     ),
                   ),
-                  onPressed: isLastQuestion
-                      ? null
-                      : () {
-                          setState(() {
-                            currentQuestionIndex++;
-                            selectedAnswerIndex =
-                                null; // Reset selected answer for the next question
-                          });
-                        },
+                  onPressed: () {
+                    handleNextQuestion();
+                    selectedAnswerIndex = null;
+                  },
                   child: Icon(
                     Icons.arrow_back_outlined,
                     textDirection: TextDirection.ltr,

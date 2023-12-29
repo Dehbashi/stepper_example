@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:im_stepper/stepper.dart';
-import './info.dart';
 import './build_step_widget.dart';
 import '../../class/button_widget.dart';
 
@@ -17,6 +16,7 @@ class CalculatorPage extends StatefulWidget {
 
 class _CalculatorPageState extends State<CalculatorPage> {
   final ScrollController _scrollController = ScrollController();
+  bool steppingEnabled = true;
   int selectedIndex = 0;
   int activeStep = 0;
 
@@ -56,6 +56,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
               Directionality(
                 textDirection: TextDirection.rtl,
                 child: IconStepper(
+                  steppingEnabled: steppingEnabled,
                   activeStep: activeStep,
                   onStepReached: (index) {
                     setState(() {
@@ -87,10 +88,13 @@ class _CalculatorPageState extends State<CalculatorPage> {
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 10),
                   child: ButtonWidget(
+                    steppingEnabled: steppingEnabled,
                     onPressedNext: () {
-                      setState(() {
-                        activeStep += 1;
-                      });
+                      if (steppingEnabled) {
+                        setState(() {
+                          activeStep += 1;
+                        });
+                      }
                     },
                     onPressedPrevious: () {
                       if (activeStep > 0) {

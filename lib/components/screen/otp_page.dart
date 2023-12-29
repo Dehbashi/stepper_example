@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 import 'package:flutter/services.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stepper_example/class/send_phone_number.dart';
 import '../../class/verify_button.dart';
 import '../../class/verify_otp.dart';

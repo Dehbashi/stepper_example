@@ -4,9 +4,13 @@ class ButtonWidget extends StatelessWidget {
   // const ButtonWidget({super.key});
 
   final void Function()? onPressedNext;
-  void Function()? onPressedPrevious;
+  final void Function()? onPressedPrevious;
+  final bool steppingEnabled;
 
-  ButtonWidget({required this.onPressedNext, required this.onPressedPrevious});
+  ButtonWidget(
+      {required this.onPressedNext,
+      required this.onPressedPrevious,
+      required this.steppingEnabled});
 
   @override
   Widget build(BuildContext context) {
@@ -39,12 +43,12 @@ class ButtonWidget extends StatelessWidget {
           flex: 4,
           child: Container(
             decoration: BoxDecoration(
-              color: Color(0xFF04A8B2),
+              color: steppingEnabled ? Color(0xFF04A8B2) : Colors.grey,
               borderRadius: BorderRadius.circular(10),
             ),
             width: MediaQuery.devicePixelRatioOf(context),
             child: TextButton(
-              onPressed: onPressedNext,
+              onPressed: steppingEnabled ? onPressedNext : null,
               child: Text(
                 'رفتن به مرحله بعد',
                 style: TextStyle(

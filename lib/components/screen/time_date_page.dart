@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import './price_box.dart';
 import './time_date.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import '../../class/button_widget.dart';
 
 class TimeDatePage extends StatefulWidget {
   const TimeDatePage({super.key});
@@ -12,21 +10,7 @@ class TimeDatePage extends StatefulWidget {
 }
 
 class _TimeDatePageState extends State<TimeDatePage> {
-  SharedPreferences? _prefs;
   String? selectedTime;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   loadSelectedTime();
-  // }
-
-  // Future<void> loadSelectedTime() async {
-  //   _prefs = await SharedPreferences.getInstance();
-  //   setState(() {
-  //     selectedTime = _prefs!.getString('selectedTime');
-  //   });
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -108,14 +92,6 @@ class _TimeDatePageState extends State<TimeDatePage> {
                 ],
               ),
             ),
-            // SizedBox(
-            //   height: 30,
-            // ),
-            // ButtonWidget(),
-            // SizedBox(
-            //   width: double.infinity,
-            //   height: 300,
-            // ),
           ],
         ),
       ),
